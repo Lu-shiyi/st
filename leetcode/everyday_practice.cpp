@@ -1,10 +1,40 @@
 #include <iostream>
+#include <algorithm>
 
 #include "solution.h"
 
-#define TODAY 1204
+#define TODAY 1205
 
 #if TODAY
+
+int Solution::leastInterval
+    (vector<char>& tasks, int n){   //O(n)
+    int len = tasks.size();
+    vector<int> A(26,0);
+    int res = 0;
+    int m = 0;
+    for(auto i : tasks){
+        A[i-'A']++;
+        m=max(m,A[i-'A']);          // 统计出现次数最多的任务。
+    }
+    int cnt = 0;
+    for(int i=0;i<26;i++){          // 统计最多次数任务有几个。
+        if(A[i]==m){
+            cnt++;
+        }
+    }
+    return max((m-1)*(n+1) + cnt,len);
+}
+
+void test1205(){
+   vector<char> A = {'A','A','A','A','A',
+   'A','B','C','D','E','F','G'};
+   Solution S;
+   int res = S.leastInterval(A,2);
+   printf("%d \n", res);
+}
+
+#else
 
 bool Solution::isPossible(vector<int>& nums){
     unordered_map<int, int> count, tail;
@@ -35,8 +65,6 @@ void test1204(){
     printf("%s", S.isPossible(A) ? "true" : "false");
 }
 
-#else
-
 int Solution::countPrimes(int n){ //O(nlogn) Eratosthenes
     int res=0;
     int temp;
@@ -64,6 +92,6 @@ void test1203(){
 #endif
 
 int main(){
-    test1204();
+    test1205();
     return 0;
 }
