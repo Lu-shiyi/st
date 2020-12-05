@@ -23,5 +23,11 @@ public:
      * Desription: task scheduler
      ***************************************************************/
     int leastInterval(vector<char>& tasks, int n);
+    
+    /*************************************************************** 
+     * Day:    1206
+     * Desription: Pascal's triangle
+     ***************************************************************/
+    vector<vector<int>> generate(int numRows);
 };
 

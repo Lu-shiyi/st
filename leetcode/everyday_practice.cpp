@@ -3,9 +3,40 @@
 
 #include "solution.h"
 
-#define TODAY 1205
+#define TODAY 1206
 
 #if TODAY
+
+vector<vector<int>> Solution::generate(int numRows){
+    vector<vector<int>> res(numRows);
+    if(numRows==0){
+        return res;
+    }
+    res[0].push_back(1);
+    for(int i=1;i<numRows;i++){
+        res[i].resize(i+1);
+        res[i][0] = 1;                           // 每一行两头元素为1
+        res[i][i] = 1;
+        for(int j=1;j<i;j++){
+            res[i][j]=res[i-1][j-1]+res[i-1][j]; // 中间元素为其两肩上的和
+        }
+    }
+    return res;
+}
+
+void test1206(){
+    Solution S;
+    vector<vector<int>> res = S.generate(5);
+    for(auto it : res){
+        int len = it.size();
+        for(int i=0;i<len;i++){
+            printf("%d ",it[i]);
+        }
+        printf("\n");
+    }
+}
+
+#else
 
 int Solution::leastInterval
     (vector<char>& tasks, int n){   //O(n)
@@ -33,8 +64,6 @@ void test1205(){
    int res = S.leastInterval(A,2);
    printf("%d \n", res);
 }
-
-#else
 
 bool Solution::isPossible(vector<int>& nums){
     unordered_map<int, int> count, tail;
@@ -92,6 +121,6 @@ void test1203(){
 #endif
 
 int main(){
-    test1205();
+    test1206();
     return 0;
 }
