@@ -3,9 +3,59 @@
 
 #include "solution.h"
 
-#define TODAY 1206
+#define TODAY 1207
 
 #if TODAY
+
+int Solution::matrixScore(vector<vector<int>>& A){
+    int len = A.size();
+    int sze = A[0].size();
+    int cnt = 0;
+    int tmp = 1;
+    int res = 0;
+    for(int i=0;i<len;i++){    //把第一列都变为1
+        if(A[i][0]==0){
+            for(int j=0;j<sze;j++){
+                A[i][j] = (A[i][j])?0:1;
+            }
+        }
+    }
+    for(int i=1;i<sze;i++){   //每一列尽量多1
+        cnt = 0;
+        for(int j=0;j<len;j++){
+            if(A[j][i]==1){
+                cnt++;
+            }
+        }
+        if(cnt<<1 < len){
+            for(int k=0;k<len;k++){
+                A[k][i] = (A[k][i])?0:1;
+            }
+        }
+    }
+    for(int i=sze-1;i>=0;i--){     //计算每一位的和
+        for(int j=0;j<len;j++){
+            if(A[j][i]==1){
+                res+=tmp;
+            }
+        }
+        tmp*=2;
+    }
+    return res;
+}
+
+void test1207(){
+    vector<vector<int>> A = {
+        {0,0,1,1},
+        {1,0,1,0},
+        {1,1,0,0}
+    };
+    Solution S;
+    int res = S.matrixScore(A);
+    printf("%d \n", res);
+}
+
+#else
 
 vector<vector<int>> Solution::generate(int numRows){
     vector<vector<int>> res(numRows);
@@ -35,8 +85,6 @@ void test1206(){
         printf("\n");
     }
 }
-
-#else
 
 int Solution::leastInterval
     (vector<char>& tasks, int n){   //O(n)
@@ -121,6 +169,6 @@ void test1203(){
 #endif
 
 int main(){
-    test1206();
+    test1207();
     return 0;
 }

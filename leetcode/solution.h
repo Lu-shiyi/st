@@ -29,5 +29,11 @@ public:
      * Desription: Pascal's triangle
      ***************************************************************/
     vector<vector<int>> generate(int numRows);
+
+    /*************************************************************** 
+     * Day:    1207
+     * Desription: Score After Flipping Matrix
+     ***************************************************************/
+    int matrixScore(vector<vector<int>>& A);
 };
 
