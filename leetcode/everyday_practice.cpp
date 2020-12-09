@@ -3,9 +3,40 @@
 
 #include "solution.h"
 
-#define TODAY 1207
+#define TODAY 1209
 
 #if TODAY
+
+int Solution::uniquePaths(int m, int n){
+
+    // 递归
+    // if(m==1||n==1) return 1;
+    // return uniquePaths(m-1,n)+uniquePaths(m,n-1);
+
+    // 动态规划
+    vector<vector<int>> A(m);
+    for(int i=0;i<m;i++){
+        A[i].resize(n);
+        A[i][0]=1;
+    }
+    for(int i=0;i<n;i++){
+        A[0][i]=1;
+    }
+    for(int i=1;i<m;i++){
+        for(int j=1;j<n;j++){
+            A[i][j] = A[i-1][j]+A[i][j-1];
+        }
+    }
+    return A[m-1][n-1];
+}
+
+void test1209(){
+    Solution S;
+    int res = S.uniquePaths(3,7);
+    printf("%d \n", res);
+}
+
+#else
 
 int Solution::matrixScore(vector<vector<int>>& A){
     int len = A.size();
@@ -54,8 +85,6 @@ void test1207(){
     int res = S.matrixScore(A);
     printf("%d \n", res);
 }
-
-#else
 
 vector<vector<int>> Solution::generate(int numRows){
     vector<vector<int>> res(numRows);
@@ -169,6 +198,6 @@ void test1203(){
 #endif
 
 int main(){
-    test1207();
+    test1209();
     return 0;
 }

@@ -35,5 +35,11 @@ public:
      * Desription: Score After Flipping Matrix
      ***************************************************************/
     int matrixScore(vector<vector<int>>& A);
+
+    /*************************************************************** 
+     * Day:    1209
+     * Desription: different paths
+     ***************************************************************/
+    int uniquePaths(int m, int n);
 };
 
