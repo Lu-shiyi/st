@@ -3,9 +3,9 @@
 
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-
     /*************************************************************** 
      * Day:    1203
      * Description: count primes from [0,n)
@@ -16,14 +16,14 @@ public:
      * Day:    1204
      * Desription: split array into consecutive subsequences
      ***************************************************************/
-    bool isPossible(vector<int>& nums);
+    bool isPossible(vector<int> &nums);
 
     /*************************************************************** 
      * Day:    1205
      * Desription: task scheduler
      ***************************************************************/
-    int leastInterval(vector<char>& tasks, int n);
-    
+    int leastInterval(vector<char> &tasks, int n);
+
     /*************************************************************** 
      * Day:    1206
      * Desription: Pascal's triangle
@@ -34,12 +34,17 @@ public:
      * Day:    1207
      * Desription: Score After Flipping Matrix
      ***************************************************************/
-    int matrixScore(vector<vector<int>>& A);
+    int matrixScore(vector<vector<int>> &A);
 
     /*************************************************************** 
      * Day:    1209
      * Desription: different paths
      ***************************************************************/
     int uniquePaths(int m, int n);
-};
 
+    /*************************************************************** 
+     * Day:    1210
+     * Desription: lemonade change
+     ***************************************************************/
+    bool lemonadeChange(vector<int> &bills);
+};
