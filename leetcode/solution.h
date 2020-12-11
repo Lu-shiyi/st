@@ -47,4 +47,10 @@ public:
      * Desription: lemonade change
      ***************************************************************/
     bool lemonadeChange(vector<int> &bills);
+
+    /*************************************************************** 
+     * Day:    1211
+     * Desription: dota2 senate
+     ***************************************************************/
+    string predictPartyVictory(string senate);    
 };

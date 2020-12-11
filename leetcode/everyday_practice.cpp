@@ -3,9 +3,42 @@
 
 #include "solution.h"
 
-#define TODAY 1210
+#define TODAY 1211
 
 #if TODAY
+
+string Solution::predictPartyVictory(string senate)
+{
+    int len;
+    int flag = 1;
+    while (flag && senate.size() > 1)  
+    {   //模拟整个过程直到senate中只含一种字符
+        flag = 0;
+        char head = senate[0];
+        senate.erase(senate.begin());               //获取第一个字符 
+        len = senate.size();
+        for (int i = 0; i < len; i++)
+        { 
+            if (senate[i] != head)                  //寻找senate中与第一个字符不同的字符
+            {
+                flag = 1;                           //说明senate中还存在第二种字符
+                senate.erase(senate.begin() + i);   //让第一个字符否决它
+                senate += head == 'R' ? "R" : "D";  //第一个字符去到字串尾部
+                break;
+            }
+        }
+    }
+    return senate[0] == 'R' ? "Radiant" : "Dire";
+}
+
+void test1211()
+{
+    Solution S;
+    string A = "RD";
+    printf(S.predictPartyVictory(A).c_str());
+}
+
+#else
 
 bool Solution::lemonadeChange(vector<int> &bills)
 {
@@ -46,8 +79,6 @@ void test1210()
     Solution S;
     printf("%s \n", S.lemonadeChange(A) ? "Y" : "N");
 }
-
-#else
 
 int Solution::uniquePaths(int m, int n)
 {
@@ -283,6 +314,6 @@ void test1203()
 
 int main()
 {
-    test1210();
+    test1211();
     return 0;
 }
