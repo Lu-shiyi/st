@@ -53,4 +53,10 @@ public:
      * Desription: dota2 senate
      ***************************************************************/
     string predictPartyVictory(string senate);    
+
+    /*************************************************************** 
+     * Day:    1212
+     * Desription: wiggle sequence
+     ***************************************************************/
+    int wiggleMaxLength(vector<int>& nums);
 };

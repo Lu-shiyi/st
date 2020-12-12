@@ -3,27 +3,66 @@
 
 #include "solution.h"
 
-#define TODAY 1211
+#define TODAY 1212
 
 #if TODAY
+
+bool cmp(int left, int right, int flag)             //用flag来控制摆动的方向
+{
+    return flag > 0 ? left < right : right < left;
+}
+
+int Solution::wiggleMaxLength(vector<int> &nums)
+{
+    int len = nums.size();
+    if (len < 2)
+    {
+        return len;
+    }
+    int cnt = 1;
+    int res = 1;
+    while (cnt < len && nums[cnt] == nums[cnt - 1]) //按给定序列个性化启动摆动检查
+    {
+        cnt++;
+    }
+    int flag = nums[cnt - 1] < nums[cnt] ? 1 : -1;
+    for (int i = cnt; i < len; i++)
+    {
+        if (cmp(nums[i - 1], nums[i], flag))
+        {
+            res++;
+            flag *= -1;
+        }         //缺省else等价于在摆动异常的情况下选择更优的当前值
+    }             //包括在左大判定失败后，说明左小，此时选择更大的右作为当前左值无疑更优
+    return res;
+}
+
+void test1212()
+{
+    vector<int> A = {1,2,5,3,2,1};
+    Solution S;
+    printf("%d \n", S.wiggleMaxLength(A));
+}
+
+#else
 
 string Solution::predictPartyVictory(string senate)
 {
     int len;
     int flag = 1;
-    while (flag && senate.size() > 1)  
-    {   //模拟整个过程直到senate中只含一种字符
+    while (flag && senate.size() > 1)
+    { //模拟整个过程直到senate中只含一种字符
         flag = 0;
         char head = senate[0];
-        senate.erase(senate.begin());               //获取第一个字符 
+        senate.erase(senate.begin()); //获取第一个字符
         len = senate.size();
         for (int i = 0; i < len; i++)
-        { 
-            if (senate[i] != head)                  //寻找senate中与第一个字符不同的字符
+        {
+            if (senate[i] != head) //寻找senate中与第一个字符不同的字符
             {
-                flag = 1;                           //说明senate中还存在第二种字符
-                senate.erase(senate.begin() + i);   //让第一个字符否决它
-                senate += head == 'R' ? "R" : "D";  //第一个字符去到字串尾部
+                flag = 1;                          //说明senate中还存在第二种字符
+                senate.erase(senate.begin() + i);  //让第一个字符否决它
+                senate += head == 'R' ? "R" : "D"; //第一个字符去到字串尾部
                 break;
             }
         }
@@ -37,8 +76,6 @@ void test1211()
     string A = "RD";
     printf(S.predictPartyVictory(A).c_str());
 }
-
-#else
 
 bool Solution::lemonadeChange(vector<int> &bills)
 {
@@ -314,6 +351,6 @@ void test1203()
 
 int main()
 {
-    test1211();
+    test1212();
     return 0;
 }
