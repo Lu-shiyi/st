@@ -3,11 +3,45 @@
 
 #include "solution.h"
 
-#define TODAY 1212
+#define TODAY 0104
 
 #if TODAY
 
-bool cmp(int left, int right, int flag)             //用flag来控制摆动的方向
+int Solution::fib(int n)
+{
+    // 递归求解
+    // if(n == 1){
+    //     return 0;
+    // }
+    // if(n == 2){
+    //     return 1;
+    // }
+    // return fib(n-1)+fib(n-2);
+
+    int f = 0;
+    int g = 1;
+    while (n)
+    {
+        g += f;
+        f = g - f;
+        n--;
+    }
+
+    return f;
+}
+
+void test0104()
+{
+    Solution S;
+    for (int i = 1; i < 7; i++)
+    {
+        printf("%d ", S.fib(i));
+    }
+}
+
+#else
+
+bool cmp(int left, int right, int flag) //用flag来控制摆动的方向
 {
     return flag > 0 ? left < right : right < left;
 }
@@ -32,19 +66,17 @@ int Solution::wiggleMaxLength(vector<int> &nums)
         {
             res++;
             flag *= -1;
-        }         //缺省else等价于在摆动异常的情况下选择更优的当前值
-    }             //包括在左大判定失败后，说明左小，此时选择更大的右作为当前左值无疑更优
+        } //缺省else等价于在摆动异常的情况下选择更优的当前值
+    }     //包括在左大判定失败后，说明左小，此时选择更大的右作为当前左值无疑更优
     return res;
 }
 
 void test1212()
 {
-    vector<int> A = {1,2,5,3,2,1};
+    vector<int> A = {1, 2, 5, 3, 2, 1};
     Solution S;
     printf("%d \n", S.wiggleMaxLength(A));
 }
-
-#else
 
 string Solution::predictPartyVictory(string senate)
 {
@@ -351,6 +383,6 @@ void test1203()
 
 int main()
 {
-    test1212();
+    test0104();
     return 0;
 }
